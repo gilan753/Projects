@@ -1,0 +1,83 @@
+html, body {
+    margin: 0;
+    padding: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+
+/** 
+  Our buttons '#open-modal, #close-modal' 
+
+  1) For the background colour use 'royalblue'
+  2) Be aware of the colour, padding & font size
+  3) Make sure the cursor has a pointer so that it demonstrates to the user the button is clickable
+**/
+#open-modal, #close-modal {
+    background-color: royalblue;
+    color: white;
+    padding: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+/** 
+  Modal: #modal
+
+  1) Add a temporary background colour of 'orange'
+  2) Add a padding of 20px
+  3) Add a height of 200px
+  4) Add a margin of 0 & auto to make sure our Modal is centered
+  5) Add a max-width of 600px
+**/
+#modal {
+    max-width: 600px; /* specify max width in case the screen is larger than we anticipated */
+    margin: 0 auto; /* centers the modal */
+    padding: 20px;
+    height: 200px;
+    /* this makes the position of modal relative to that of it's parent (overlay) */
+    position: relative;
+    /* changes the background color to white */
+    background-color: white;
+    /* sets the top to be 30% of the page height from the top of it's first positioned ancestor (overlay) */
+    top: 30%;
+}
+
+/** 
+  Overlay: #overlay
+
+  1) Add a width and a height of 100%
+  2) Position absolute (allows us to place any element exactly where we want it)
+  3) Set top, left, bottom, right to 0
+  4) Add a background colour of black
+  5) Add position relative to #modal so that it's relative to #overlay
+  6) Put the background of #modal to white (temp background no longer needed)
+  7) Add top: 30% to #modal
+**/
+#overlay {
+    /* initially hides the overlay */
+    display: none; 
+    /* makes the overlay take up the entire area */
+    width: 100%;
+    height: 100%;
+    /* allows us to place any kind of element exactly where we want it 
+    (even over other elements) - gives us full control*/
+    position: absolute;
+    /* sets the element's top to align with the top of the first positioned ancestor
+    (in this case, the overlay's top aligns itself with the top of body) */
+    top: 0;
+    /* just like top:, but with the left edge instead */
+    left: 0;
+    /* same as above, but with bottom */
+    bottom: 0;
+    /* same as above, but with the right */
+    right: 0;
+    /* rgba has these parameters(red, green, blue, opacity)
+        - opacity: 0 is see-through, 1 is the full color
+        - red, green, and blue are the base of every color
+        - get colors from color palletes online
+        this makes the background semi-transparent
+    */
+    background-color: rgba(0, 0, 0, 0.3);
+}

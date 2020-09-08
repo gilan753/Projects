@@ -92,6 +92,8 @@ class Timer {
         this.timerLength = (hours * 60 * 60) + (minutes * 60)
         this.createHtml()
     }
+    // the nested interval doesn't pause the other interval, it just makes them both
+    // go at the same time
     start() {
         let timerInterval = setInterval( () => {
             if (this.isPaused) {
