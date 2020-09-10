@@ -1,3 +1,210 @@
+/* Notes
+    - media queries
+        - style 300px and up, 600px and up, and 900px and up
+*/
+
+/* Standard Code */
+*,
+*::before,
+*::after {
+    /* do this on every project;
+    this makes the padding within the width instead of adding to the total width */
+    box-sizing: border-box;
+}
+
+/* Custom Properties */
+:root {
+    /* fonts */
+    --ff-primary: 'Source Sans Pro', sans-serif;
+    --ff-secondary: 'Source Code Pro', monospace;
+
+    /* font-weights */
+    --fw-reg: 300;
+    --fw-bold: 900;
+
+    /* background color */
+    --clr-light: #fff;
+    /* text color */
+    --clr-dark: #303030;
+    /* accent color */
+    --clr-accent: #16e0bd;
+
+    /* font sizes (always use rem) */
+    --fs-h1: 3rem;
+    --fs-h2: 2.25rem;
+    --fs-h3: 1.25rem;
+    --fs-body: 1rem;
+
+    /* box-shadow */
+    /* bs: right down blur color */
+    /* using multiple layers to increase the realism of the shadows */
+    --bs: .25em .25em .75em rgba(0, 0, 0, .25),
+        .125em .125em .25em rgba(0,0,0,.15);
+}
+
+/* Larger Screen Sizes */
+@media (min-width: 800px) {
+    :root {
+        /* font sizes @ larger screens */
+        --fs-h1: 4.5rem;
+        --fs-h2: 3.75rem;
+        --fs-h3: 1.5rem;
+        --fs-body: 1.125rem;
+    }
+}
+
+
+/* General Styles */
+
 body {
-    background: red;
+    background: var(--clr-light);
+    color: var(--clr-dark);
+    margin: 0;
+    font-family: var(--ff-primary);
+    font-size: var(--fs-body);
+    /* default line height on everything */
+    line-height: 1.6;
+}
+
+section {
+    padding: 5em 2em;
+}
+
+img {
+    display: block;
+    /* so they don't overflow */
+    max-width: 100%;
+}
+
+strong { font-weight: var(--fw-bold) }
+
+
+/* Typography */
+
+h1,
+h2,
+h3 {
+    /* smaller line height bc they're bigger */
+    line-height: 1;
+    /* resetting  it to 0 */
+    margin: 0;
+}
+
+h1 { font-size: var(--fs-h1) }
+h2 { font-size: var(--fs-h2) }
+h3 { font-size: var(--fs-h3) }
+
+.section__title {
+    margin-bottom: .25em;
+}
+
+.section__title--intro {
+    font-weight: var(--fw-reg);
+}
+
+.section__title--intro strong {
+    /* so the name is always on a new line */
+    display: block;
+}
+
+.section__subtitle {
+    margin: 0;
+    font-size: var(--fs-h3);
+}
+
+.section__subtitle--intro,
+.section__subtitle--about {
+    background: var(--clr-accent);
+    padding: .25em 1em;
+    font-family: var(--ff-secondary);
+    margin-bottom: 1em;
+}
+
+
+/* header */
+
+nav { display: none }
+
+
+/* Intro Section */
+
+.intro {
+    /* is a precursor to absolute positioning on the children */
+    position: relative;
+}
+
+.intro__img {
+    box-shadow: var(--bs);
+}
+
+.section__subtitle--intro {
+    /* makes the bar not take up the entire width on small screen sizes */
+    display: inline-block;
+}
+
+@media (min-width: 600px) {
+    .intro {
+        display: grid;
+        /* shrinks the intro div down to as small as possible */
+        width: min-content;
+        /* centers the intro div */
+        margin: 0 auto;
+        grid-column-gap: 1em;
+        grid-template-areas:
+            "img title"
+            "img subtitle";
+        /* min-content tries shrink it down,
+        max-content makes it as big as possible */
+        grid-template-columns: min-content max-content;
+    }
+
+    .intro__img {
+        grid-area: img;
+        /* the min-content makes the image disappear, so we need to add a 
+        min-width so that it doesn't disappear */
+        min-width: 250px;
+        position: relative;
+        /* puts the img on top */
+        z-index: 2;
+    }
+
+    .section__subtitle--intro {
+        /* stops it from stretching down */
+        align-self: start;
+        /* makes it stretch the entire length of the grid */
+        grid-column: -1 / 1;
+        /* because they don't want to overlap by default, we specify
+        the subtitle to be on row 2 so that it's forced to overlap */
+        grid-row: 2;
+        /* when we overlap the img and subtitle, the text is hidden underneath the
+        img, so we need to align it to the right so that we can see it */
+        text-align: right;
+        /* the following makes the bar go underneath the image */
+        /* allows us to use left: property, to position it */
+        position: relative;
+        /* pushes the subtitle away from the left side by -1.5 em, which essentially
+        pulls it 1.5 em to the left */
+        left: -1.5em;
+        /* because we pull the subtitle 1.5 em to left, it no longer spans the entire
+        width of the grid. To compensate from the amount we pull it to the left, we 
+        simply add the amount we pull it by to the total width (100%), and set the new 
+        width to that value */
+        width: calc(100% + 1.5em);
+    }
+}
+
+/* My services section */
+
+.my-services {
+    /* always set a background color before the background image, in case the 
+    image fails to load, so we have a fallback */
+    background-color: var(--clr-dark);
+    background-image: url(../img/services-bg.jpg);
+    /* so that the image doesn't repeat */
+    background-size: cover;
+    /* darkens the image to increase contrast with the text by blending the 
+    background color we set with the image; to lessen the contrast, use a lighter
+    background color */
+    /* background-blend-mode: multiply; */
+    color: var(--clr-light);
 }
