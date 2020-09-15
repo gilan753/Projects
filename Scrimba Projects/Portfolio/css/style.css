@@ -207,4 +207,46 @@ nav { display: none }
     background color */
     /* background-blend-mode: multiply; */
     color: var(--clr-light);
+    /* everything on small screen sizes is centered */
+    text-align: center;
+}
+
+.section__title--services {
+    color: var(--clr-accent);
+    /* doing this because we want to put a pseudo-element on this (the after) */
+    position: relative;
+}
+
+
+/* this is our pseudo-element; we're doing this to create the white line beneath the "What I do" */
+.section__title--services::after {
+    /* need to give pseudo-elements a content or they won't appear */
+    content: '';
+    display: block;
+    width: 2em;
+    height: 1px;
+    /* margin: top left/right bottom */
+    margin: 0.5em auto 1em;
+    /* using background: currentColor will make it replicate the parent element's color */
+    background: var(--clr-light);
+    /* dims it a little bit */
+    opacity: 0.25;
+}
+
+@media (min-width: 800px) {
+    .services {
+        /* will make 3 columns */
+        display: flex;
+        /* puts a limit on how much it'll grow */
+        max-width: 1000px;
+        /* centers it */
+        margin: 0 auto; 
+    }
+
+    /* this selector only selects .service divs that have a sibling on the left
+        - this makes it so that there isn't unecessary space to the left of the first one,
+        and adds space in between each column */
+    .service + .service {
+        margin-left: 2em;
+    }
 }
